@@ -3,6 +3,7 @@ package com.example.calculadoraandroid;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -36,5 +37,44 @@ public class MainActivity extends AppCompatActivity {
         Point = findViewById(R.id.point);
         Ans = findViewById(R.id.ans);
         Equal = findViewById(R.id.equal);
+    }
+    public void ButtonClick(View view){
+        Button button=(Button) view;
+        String data = button.getText().toString();
+        switch (data){
+            case "AC":
+                input="";
+                break;
+            case "Ans":
+                input += Answer;
+                break;
+            case "*":
+                solve();
+                input += "*";
+                break;
+            case "^":
+                solve();
+                input += "^";
+                break;
+            case "=":
+                solve();
+                Answer = input;
+                break;
+            case "DEL":
+                String newText = input.substring(0,input.length()-1);
+                input = newText;
+                break;
+            default:
+                if(input==null){
+                    input="";
+                }
+                if(data.equals("+") || data.equals("-") || data.equals("/")){
+                   solve();
+            }
+                input += data;
+        }
+        Screen.setText(input);
+    }
+    private void solve() {
     }
 }
